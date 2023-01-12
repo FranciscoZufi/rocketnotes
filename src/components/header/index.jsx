@@ -7,7 +7,7 @@ export function Header(){
       <Profile>
         <img src="https://github.com/franciscozufi.png" alt="Foto do usuário" />
         <div>
-          <span>Bem-Vindo,</span>
+          <span>Welcome,</span>
           <strong>Francisco Zufi</strong>
         </div>
       </Profile>

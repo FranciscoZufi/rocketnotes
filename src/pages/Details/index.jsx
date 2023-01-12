@@ -16,7 +16,7 @@ export function Details() {
         <Content>
       <ButtonText title='Excluir nota'/>
       
-      <h1>Introdução ao React</h1>
+      <h1>Introduction to React</h1>
           <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam beatae omnis ullam consequatur, consectetur ut facere tenetur maiores. Hic id error quidem fuga blanditiis molestias pariatur explicabo molestiae et illo?</p>
       <Section title="Links úteis">
         <Links>
@@ -25,12 +25,12 @@ export function Details() {
         
         </Links>
       </Section>
-      <Section title="Marcadores">
+      <Section title="Bookmarks">
         <Tag title='express' />
         <Tag title='nodejs' />
     
       </Section>
-       <Button title="Voltar" />
+       <Button title="Come back" />
        </Content>
       </main>
     </Container>
