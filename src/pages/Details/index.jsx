@@ -1,10 +1,15 @@
 import {Container} from './styles'
-export function Details(){
+import { Button } from '../../components/Button'
+
+export function Details() {
+
 
   return (
     <Container>
     <h1>Hello Word!</h1>
-    <span>Francisco Zufi</span>
+    <span>Francisco Zufi</span>,
+
+    <Button/>
     </Container>
     
   )
