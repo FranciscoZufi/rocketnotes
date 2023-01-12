@@ -8,7 +8,11 @@ import { Button } from '../../components/Button'
 export function Profile(){
   return (
     <Container>
-      <header><Link to='/'><FiArrowLeft/></Link></header>
+      <header>
+        <Link to='/'>
+          <FiArrowLeft/>
+          </Link>
+      </header>
       <Form>
         <Avatar> <img src="https://github.com/franciscozufi.png" alt="Foto do usuário" />
         <label htmlFor="avatar">
