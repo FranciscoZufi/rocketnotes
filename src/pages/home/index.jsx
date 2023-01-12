@@ -1,4 +1,4 @@
-import { FiPlus, FiSearch } from 'react-icons/fi'
+import { FiPlus } from 'react-icons/fi'
 import { Container, Brand, Menu, Search, Content, NewNote } from './styles'
 
 import { Header } from '../../components/header'
@@ -19,24 +19,24 @@ export function Home() {
       </Header>
 
       <Menu>
-       <li><ButtonText title="Todos" isActive/></li>
+       <li><ButtonText title="All" isActive/></li>
        <li><ButtonText title="Nodejs" /></li>
        <li><ButtonText title="React" /></li>
       </Menu>
 
       <Search>
-        <Input placeholder="Pesquisar pelo título" icon={FiSearch}/>
+        <Input placeholder="Search by title" icon={FiSearch}/>
       </Search>
 
       <Content>
-        <Section title="Minhas notas">
+        <Section title="My notes">
         <Note data={{ title:'React', tags: [{id: '1', name:'react'}, {id: '2', name:'rocketseat'}]}}/>
         </Section>
       </Content>
 
-      <NewNote>
+      <NewNote to='/new'>
        <FiPlus />
-        Criar nota
+        Create note
       </NewNote>
     </Container>
   )
