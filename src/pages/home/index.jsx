@@ -1,7 +1,11 @@
+import { FiPlus, FiSearch } from 'react-icons/fi'
 import { Container, Brand, Menu, Search, Content, NewNote } from './styles'
 
 import { Header } from '../../components/header'
 import { ButtonText } from '../../components/buttonText'
+import { Input } from '../../components/Input'
+import { Note } from '../../components/Note'
+import { Section } from '../../components/Section'
 
 export function Home() {
   return (
@@ -21,15 +25,18 @@ export function Home() {
       </Menu>
 
       <Search>
-
+        <Input placeholder="Pesquisar pelo título" icon={FiSearch}/>
       </Search>
 
       <Content>
-
+        <Section title="Minhas notas">
+        <Note data={{ title:'React', tags: [{id: '1', name:'react'}, {id: '2', name:'rocketseat'}]}}/>
+        </Section>
       </Content>
 
       <NewNote>
-
+       <FiPlus />
+        Criar nota
       </NewNote>
     </Container>
   )
