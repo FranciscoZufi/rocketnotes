@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Header } from '../../components/header'
 import { Input } from '../../components/Input'
 import { Textarea } from '../../components/Textarea'
@@ -9,6 +10,7 @@ import { Link } from 'react-router-dom'
 import { Container, Form } from './styles'
 
 export function New(){
+  const [links, setLinks] = useState([])
   return (
     <Container>
       <Header />
