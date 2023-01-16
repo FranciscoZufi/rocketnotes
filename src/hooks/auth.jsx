@@ -10,7 +10,7 @@ function AuthProvider({ children }) {
       const response = await api.post('/sessions', {email, password})
       const { user, token} = response.data
       api.defaults.headers.authorization = `Bearer ${token}`
-      setData(user, token)
+      setData({user, token})
     } catch(error){
       if(error.response){
         alert(error.response.data.message)
@@ -20,6 +20,7 @@ function AuthProvider({ children }) {
     }
     
   }
+  console.log({id:data.user})
   return (
     <AuthContext.Provider value={{ singIn, user: data.user }}>
       {children}
