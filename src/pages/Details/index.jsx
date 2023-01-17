@@ -4,35 +4,78 @@ import { Button } from '../../components/Button'
 import { Section } from '../../components/Section'
 import { Tag } from '../../components/Tag'
 import { ButtonText } from '../../components/ButtonText'
+import { useParams, useNavigate } from   'react-router-dom'
+import { useEffect, useState } from 'react'
+import { api } from '../../services/api'
 
 
 export function Details() {
+  const [data, setData] = useState(null)
+
+  const params = useParams()
+  const navigate = useNavigate()
+
+  
+
+  function handleBack(){
+    navigate(-1)
+  }
+
+  async function handleRemove(){
+    const confirm = window.confirm('Really want to remove the note?')
+
+    if(confirm){
+      await api.delete(`/notes/${params.id}`)
+      navigate(-1)
+    }
+  }
+
+  useEffect(() => {
+    async function fetchNote(){
+      const response = await api.get(`/notes/${params.id}`)
+      setData(response.data)
+    }
+    fetchNote()
+  }, [])
+
 
 
   return (
     <Container>
       <Header/>
-      <main>
+     { 
+     data &&
+     <main>
         <Content>
-      <ButtonText title='Excluir nota'/>
+      <ButtonText title='Excluir nota' onClick={handleRemove}/>
       
-      <h1>Introduction to React</h1>
-          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam beatae omnis ullam consequatur, consectetur ut facere tenetur maiores. Hic id error quidem fuga blanditiis molestias pariatur explicabo molestiae et illo?</p>
-      <Section title="Links úteis">
-        <Links>
-          <li><a href="#">https://www.rocketseat.com.br</a></li>
-          <li><a href="#">https://www.rocketseat.com.br</a></li>
-        
-        </Links>
-      </Section>
-      <Section title="Bookmarks">
-        <Tag title='express' />
-        <Tag title='nodejs' />
-    
-      </Section>
-       <Button title="Come back" />
+      <h1>{data.note.title}</h1>
+          <p>{data.note.description}</p>
+      { data.links &&
+          <Section title="Links úteis">
+          <Links>
+            {
+              data.links.map(link => (<li key={String(link.id)}><a href={link.url} target="_black">{link.url}</a></li>))
+            }
+            </Links>
+          </Section>
+      }
+       { data.tags &&
+        <Section title="Bookmarks">
+           { 
+           data.tags.map(tag => (
+           <Tag 
+           title={tag.name} 
+           key={String(tag.id)}
+           />
+           ))
+           }
+        </Section>
+        }
+       <Button title="Come back" onClick={handleBack}/>
        </Content>
       </main>
+    } 
     </Container>
     
   )

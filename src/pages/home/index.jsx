@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { FiPlus, FiSearch } from 'react-icons/fi'
 import { Container, Brand, Menu, Search, Content, NewNote } from './styles'
+import { useNavigate }  from 'react-router-dom'
 
 import { Header } from '../../components/header'
 import { ButtonText } from '../../components/buttonText'
@@ -12,8 +13,16 @@ import { api } from '../../services/api'
 export function Home() {
   const [tags, setTags] = useState([])
   const [tagsSelected, setTagsSelected] = useState([])
+  const [search, setSearch] = useState('')
+  const [notes, setNotes]= useState([])
+  
+  const navigate = useNavigate()
   
 function handleTagSelected(tagName){
+  if(tagName === 'all'){
+    return setTagsSelected([])
+  }
+
   const alreadySelected = tagsSelected.includes(tagName)
   
   if(alreadySelected){
@@ -24,6 +33,11 @@ function handleTagSelected(tagName){
   }
 
 }
+
+function handleDetails(id){
+  navigate(`/details/${id}`)
+}
+
   useEffect(() => {
     async function fetchTags(){
       const response = await api.get('/tags')
@@ -31,6 +45,15 @@ function handleTagSelected(tagName){
     }
     fetchTags()
   }, [])
+
+  useEffect(() => {
+    async function fetchNotes(){
+      const response = await api.get(`/notes?title=${search}&tags=${tagsSelected}`)
+      setNotes(response.data)
+    }
+    fetchNotes()
+  }, [tagsSelected, search])
+
   return (
     <Container>
       <Brand>
@@ -56,12 +79,24 @@ function handleTagSelected(tagName){
       </Menu>
 
       <Search>
-        <Input placeholder="Search by title" icon={FiSearch}/>
+        <Input 
+        placeholder="Search by title" 
+        icon={FiSearch}
+        onChange={(e) => setSearch(e.target.value)}
+        />
       </Search>
 
       <Content>
         <Section title="My notes">
-        <Note data={{ title:'React', tags: [{id: '1', name:'react'}, {id: '2', name:'rocketseat'}]}}/>
+        { 
+          notes.map(note => (
+            <Note 
+            key={String(note.id)}
+            data={note} 
+            onClick={() => handleDetails(note.id)}
+            />
+          ))
+        }
         </Section>
       </Content>
 
