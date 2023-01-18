@@ -32,8 +32,8 @@ export function Profile(){
       name, email, password: passwordNew, old_password: passwordOld
     }
     const userUpdated = Object.assign(user, updated)
-    return console.log(userUpdated)
-    await updateProfile({user, avatarFile})
+    
+    await updateProfile({user: userUpdated, avatarFile})
   }
   function handleChangeAvatar(event){
     const file = event.target.files[0]
